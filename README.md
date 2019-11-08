@@ -19,5 +19,6 @@
 * koa 05-mdServer 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/05-mdServer
 * koa 06-mdServer2 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/06-mdServer2
 * koa 09-mdBlogMt 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/02/09-mdBlogMt
+* code 06-await 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/04
 
 多数程式里的代码重复，因此只翻译一遍，并取其中典型例题翻译举例，其余程式内容大体同上
