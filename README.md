@@ -12,6 +12,12 @@
 
 ## 第一次考试
 
-* koa 01 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/01
-* koa 02 程式翻译 -- 
+* koa 01-hello 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/01
+* koa 02-404 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/02-404
+* koa 03-static 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/03-static
+* koa 04-fileServer 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/04-fileServer
+* koa 05-mdServer 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/05-mdServer
+* koa 06-mdServer2 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/06-mdServer2
+* koa 09-mdBlogMt 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/02/09-mdBlogMt
 
+多数程式里的代码重复，因此只翻译一遍，并取其中典型例题翻译举例，其余程式内容大体同上
