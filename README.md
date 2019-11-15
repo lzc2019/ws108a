@@ -25,5 +25,6 @@
 * 自己寫的程式 -- https://github.com/lzc2019/ws108a/blob/master/mywork/01%20helloword.js
 * 自己寫的程式 -- https://github.com/lzc2019/ws108a/blob/master/mywork/02%20zx.js
 * 自己寫的程式 -- https://github.com/lzc2019/ws108a/blob/master/mywork/03wangzhan%20.js
+* 大部分是參考加一些自己的修改，有的自己也不知道自己在寫什麼 T_T
 
 
