@@ -20,10 +20,10 @@
 * koa 06-mdServer2 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/03/06-mdServer2/app.js
 * koa 09-mdBlogMt 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/02/09-mdBlogMt/app.js
 * code 06-await 程式翻译 -- https://github.com/lzc2019/ws108a/tree/master/exercise/04/copyfileCallback.js
-*                       -- https://github.com/lzc2019/ws108a/blob/master/exercise/04/copyfileEs6.js
+*                      -- https://github.com/lzc2019/ws108a/blob/master/exercise/04/copyfileEs6.js
 多数程式里的代码重复，因此只翻译一遍，并取其中典型例题翻译举例，其余程式内容大体同上
 *自己寫的程式 -- https://github.com/lzc2019/ws108a/blob/master/mywork/01%20helloword.js
 *自己寫的程式 -- https://github.com/lzc2019/ws108a/blob/master/mywork/02%20zx.js
 *自己寫的程式 -- https://github.com/lzc2019/ws108a/blob/master/mywork/03wangzhan%20.js
-大部分是參考加一些自己的修改，有的自己也不知道自己在寫什麼 T_T
+
 
