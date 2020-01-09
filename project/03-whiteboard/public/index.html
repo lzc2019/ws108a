@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO whiteboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Chatroom</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+      var socket = io();
+  </script>
+  <style>
+      html, body {
+          padding: 0;
+          margin: 0;
+      }
+
+      #container {
+          top: 50px;
+          width: 500px;
+          margin: 0 auto;
+          display: block;
+          position: relative;
+      }
+
+      #status-box {
+          text-align: right;
+          font-size: .6em;
+      }
+
+      #content {
+          width: 100%;
+          height: 350px;
+          border: 1px solid darkolivegreen;
+          border-radius: 5px;
+          overflow: auto;
+      }
+
+      #send-box {
+          width: 100%;
+          text-align: center;
+      }
+
+      #send-box input {
+          display: inline-block;
+      }
+
+      #send-box input.error {
+          border: 1px solid red;
+      }
+
+      input[name="name"] {
+          width: 15%;
+      }
+
+      input[name="msg"] {
+          width: 30%;
+      }
+
+      input[type="button"] {
+          width: 10%;
+      }
+
+      .msg {
+          width: 73%;
+          display: inline-block;
+          padding: 5px 0 5px 10px;
+      }
+
+      .msg > span {
+          width: 25%;
+          display: inline-block;
+      }
+
+      .msg > span::before {
+          color: darkred;
+          content: " { ";
+      } 
+
+      .msg > span::after {
+          color: darkred;
+          content: " } ";
+      }        
+  </style>
+</head>
+<body>
+  <div id="container">
+      <div id="status-box">Server: <span id="status">-</span> / <span id="online">0</span> online.</div>
+      <div id="content">
+      </div>
+      <div id="send-box">
+          <form id="send-form">
+              <input type="text" name="name" id="name" placeholder="暱稱">
+              <input type="text" name="msg" id="msg" placeholder="說點什麼？">
+              <input type="submit" value="送出">
+          </form>
+      </div>
+  </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+
+          var status = document.getElementById("status");
+          var online = document.getElementById("online");
+          var sendForm = document.getElementById("send-form");
+          var content = document.getElementById("content");
+
+          socket.on("connect", function () {
+              status.innerText = "Connected.";
+          });
+
+          socket.on("disconnect", function () {
+              status.innerText = "Disconnected.";
+          });
+
+          socket.on("online", function (amount) {
+              online.innerText = amount;
+          });
+
+          socket.on("msg", function (d) {
+              var msgBox = document.createElement("div")
+                  msgBox.className = "msg";
+              var nameBox = document.createElement("span");
+                  nameBox.className = "name";
+              var name = document.createTextNode(d.name);
+              var msg = document.createTextNode(d.msg);
+
+              nameBox.appendChild(name);
+              msgBox.appendChild(nameBox);
+              msgBox.appendChild(msg);
+              content.appendChild(msgBox);
+          });
+
+          sendForm.addEventListener("submit", function (e) {
+              e.preventDefault();
+
+              var ok = true;
+              var formData = {};
+              var formChild = sendForm.children;
+
+              for (var i=0; i< sendForm.childElementCount; i++) {
+                  var child = formChild[i];
+                  if (child.name !== "") {
+                      var val = child.value;
+                      if (val === "" || !val) {
+                          ok = false;
+                          child.classList.add("error");
+                      } else {
+                          child.classList.remove("error");
+                          formData[child.name] = val;
+                      }
+                  }
+              }
+
+              if (ok) socket.emit("send", formData);
+          });
+
+
+      });
+  </script>
+</body>
+
+<body>
+  <div class="colors">
+    <div class="color black"></div>
+    <div class="color red"></div>
+    <div class="color green"></div>
+    <div class="color blue"></div>
+    <div class="color yellow"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+  <script src="/main.js"></script>
+
+  <title>Socket.IO chat</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font: 13px Helvetica, Arial; }
+    form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+    form input { border: 0; padding: 10px; width: 50%; margin-right: .5%; }
+    form button, input[type=submit] { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+    #messages { list-style-type: none; margin: 0; padding: 0; }
+    #messages li { padding: 5px 10px; }
+    #messages li:nth-child(odd) { background: #eee; }
+    #messages { margin-bottom: 40px }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+  <script>
+    var socket = io('http://localhost:3000')
+    var form = document.querySelector('form')
+    var user = document.querySelector('#user')
+    var msg  = document.querySelector('#msg')
+    var messages  = document.querySelector('#messages')
+    var domParser = new DOMParser()
+
+    // 參考 -- https://davidwalsh.name/convert-html-stings-dom-nodes
+    function html2node(html) {
+      let doc = domParser.parseFromString(html, 'text/html')
+      return doc.body.firstChild
+    }
+
+    form.onsubmit = function() {
+      let umsg = user.value + ':' + msg.value
+      socket.emit('chat message', umsg)
+      console.log('umsg=', umsg)
+      msg.value = ''
+      return false
+    }
+
+    socket.on('chat message', function(msg){
+      messages.appendChild(html2node('<li>'+msg+'</li>'))
+      window.scrollTo(0, document.body.scrollHeight)
+    })
+  </script>
+</body>
+</html>
